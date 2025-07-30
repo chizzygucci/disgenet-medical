@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    command: uvicorn inferenceserve:app --host 0.0.0.0 --port 8000
+    environment:
+      VAULT_ADDR: http://vault:8200
+      VAULT_TOKEN: ${VAULT_TOKEN}
+    volumes:
+      - ./outputs/tokenizer:/outputs/tokenizer
+      - ./outputs/model:/outputs/model
+
+  vault:
+    image: hashicorp/vault:1.15.2
+    ports:
+      - "8200:8200"
+    command: server -dev -dev-root-token-id=root
+
