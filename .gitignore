@@ -21,6 +21,7 @@ images/
 *.h5
 *.pt
 *.ckpt
+*.safetensors
 
 # System files
 .DS_Store
