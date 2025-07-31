@@ -31,3 +31,4 @@ Thumbs.db
 *.log
 *.out
 outputs/model/model.safetensors
+outputs/model/model.safetensors
