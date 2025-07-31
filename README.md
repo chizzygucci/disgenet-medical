@@ -112,8 +112,26 @@ docker system prune -af --volumes
 3.	Rebuild and start the containers fresh:
 
 docker-compose build --no-cache
-docker-compose up --force-recreate 
+docker-compose up --force-recreate
 
 
-**Implemented Fix:**
+**Problem:**
+
+
+NumPy Compatibility Issue (PyTorch & Transformers)
+During setup, I encounterd errors related to safetensors, torch, or transformers. These are often caused by incompatibility with NumPy version 2.x.
+
+ #cause
+Many machine learning libraries (including PyTorch, Transformers, and JAX) were built against NumPy 1.x APIs. NumPy 2.x introduces breaking changes that are not yet fully supported by all these libraries.
+
+ImportError: numpy.core.multiarray failed to import
+
+#solution
+To avoid these issues, pin NumPy to a version below 2.0.
+In my requirements.txt: i impute "numpy<2.0"
+
+
+This ensures compatibility with existing ML libraries and avoids runtime crashes during Docker build or container inference.
+
+
 
